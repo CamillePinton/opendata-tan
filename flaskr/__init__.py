@@ -1,7 +1,12 @@
-from flask import Flask
+from flask import Flask, request, render_template
 import os
 import requests
 
+"""
+to run the app, do
+flask --app flaskr run
+or in pycharm:
+-edit configuration
 -set Target type to 'Module name'
 -set Target to 'flaskr'
 """
@@ -18,21 +23,32 @@ def create_app(test_config=None):
 
     @app.route('/')
     def hello_world():
-        return 'Hello, World!'
+        return render_template('index.html')
 
 
     # Recherche arrets proche d'une latitude/longitude
     @app.route('/find_arret/<latitude>/<longitude>', methods=['GET'])
     def get_closest_arret(latitude, longitude):
-        req = requests.get(opendata_link + "/ewp/arrets.json/{latitude}/{longitude}")
+        req = requests.get(opendata_link + "/ewp/arrets.json/{latitude}/{longitude}").json()
         return req
 
 
     # Liste de tous les arrets
-    @app.route('/arrets', methods=['GET'])
-    def get_arrets():
+
+    @app.route('/arrets', methods=['GET','POST'])
+    def get_arrets_by_ligne():
         arrets = requests.get(opendata_link + '/ewp/arrets.json').json()
-        return arrets
+        if request.method == 'POST':
+            # Retrieve the text from the textarea
+            num_ligne = request.form.get('textarea')
+            # Print the text in terminal for verification
+            arrets_ligne = []
+            for arret in arrets:
+                if {"numLigne": num_ligne} in arret['ligne']:
+                    arrets_ligne.append(arret)
+            return render_template('arrets.jinja2', arrets=arrets_ligne)
+        return render_template('arrets.jinja2', arrets=arrets)
+
 
     # Horaires (théoriques)
 
