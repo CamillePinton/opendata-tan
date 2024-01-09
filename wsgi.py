@@ -6,9 +6,6 @@ app = Flask(__name__)
 
 opendata_link = "https://open.tan.fr"
 
-HOST='0.0.0.0'
-PORT=5000
-
 @app.route('/')
 def hello_world():
     return 'Hello, World!'
@@ -37,4 +34,4 @@ def get_arrets():
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
-    app.run(host=HOST, port=PORT)
+    app.run(host='0.0.0.0', port=port)
