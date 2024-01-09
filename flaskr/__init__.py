@@ -2,6 +2,10 @@ from flask import Flask
 import os
 import requests
 
+-set Target type to 'Module name'
+-set Target to 'flaskr'
+"""
+
 def create_app(test_config=None):
     app = Flask(__name__)
 
