@@ -1,0 +1,7 @@
+{
+  "name": "Opendata TAN",
+  "description": "Application qui utilise l'OpenAPI de la TAN",
+  "logo": "https://scalingo.com/logo.svg",
+  "repository": "https://github.com/maxime-cool/opendata-tan",
+  "website": "https://opendata-tan.osc-fr1.scalingo.io/"
+}
