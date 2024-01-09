@@ -6,6 +6,7 @@ app = Flask(__name__)
 opendata_link = "https://open.tan.fr"
 
 
+
 @app.route('/')
 def hello_world():
     return 'Hello, World!'
