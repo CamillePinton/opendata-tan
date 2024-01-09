@@ -37,4 +37,4 @@ def get_arrets():
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
-    app.run(host=, port=port)
+    app.run(host=HOST, port=PORT)
