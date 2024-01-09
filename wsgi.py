@@ -5,7 +5,8 @@ app = Flask(__name__)
 
 opendata_link = "https://open.tan.fr"
 
-
+PORT = 5000
+HOST = '0.0.0.0'
 
 @app.route('/')
 def hello_world():
