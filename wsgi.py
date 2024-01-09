@@ -12,7 +12,7 @@ def hello_world():
 
 
 # Recherche arrets proche d'une latitude/longitude
-@app.route('find_arret/<latitude>/<longitude>', methods=['GET'])
+@app.route('/find_arret/<latitude>/<longitude>', methods=['GET'])
 def get_closest_arret(latitude, longitude):
     req = requests.get(opendata_link + "/ewp/arrets.json/{latitude}/{longitude}")
     return req
