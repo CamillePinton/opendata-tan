@@ -7,6 +7,11 @@ def create_app(test_config=None):
 
     opendata_link = "https://open.tan.fr"
 
+    if test_config:
+        app.config.update({
+            "TESTING": True,
+        })
+
     @app.route('/')
     def hello_world():
         return 'Hello, World!'
