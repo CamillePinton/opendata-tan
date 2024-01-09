@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template
 import os
 import requests
+from flask_swagger_ui import get_swaggerui_blueprint
 
 """
 to run the app, do
@@ -11,8 +12,20 @@ or in pycharm:
 -set Target to 'flaskr'
 """
 
+SWAGGER_URL = '/api/docs'  # URL for exposing Swagger UI (without trailing '/')
+API_URL = '/static/swagger.json'  # Our API url (can of course be a local resource)
+
+swaggerui_blueprint = get_swaggerui_blueprint(
+    SWAGGER_URL,
+    API_URL,
+    config={
+        'app_name': "opendata-tan"
+    }
+)
+
 def create_app(test_config=None):
     app = Flask(__name__)
+    app.register_blueprint(swaggerui_blueprint)
 
     opendata_link = "https://open.tan.fr"
 
