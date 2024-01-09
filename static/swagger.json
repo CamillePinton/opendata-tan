@@ -1,0 +1,134 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+      "title": "Hackathon - Opendata-tan 3.0",
+      "description": "IMT Atlantique - UE Hackathon - groupe1 - Maxime Garnier, Camille Pinton, Thomas Ruan",
+      "termsOfService": "http://swagger.io/terms/",
+      "contact": {
+        "email": "apiteam@swagger.io"
+      },
+      "license": {
+        "name": "Apache 2.0",
+        "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+      },
+      "version": "1.0.11"
+    },
+
+    "tags": [
+      {
+        "name": "Application",
+        "description": "Everything about OpenApi TAN ",
+        "externalDocs": {
+          "description": "Find out more",
+          "url": "https://open.tan.fr/doc/openapi"
+        }
+      },
+      {
+        "name": "Autres",
+        "description": "Je ne sais pas mais il faut encore automatiser ca"
+      }
+    ],
+    
+    "paths": {
+        "/": {
+          "get": {
+            "tags": ["Application"],
+            "summary": "Page Home",
+            "description": "Hello world !",
+            "responses": {
+              "200": {
+                "description": "Successful response",
+                "content": {
+                  "text/plain": {
+                    "example": "Hello, World!"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/find_arret/{latitude}/{longitude}": {
+          "get": {
+            "tags": ["Application"],
+            "summary": "Find closest stop",
+            "description": "Retrieve stops near a specific latitude and longitude",
+            "parameters": [
+              {
+                "name": "latitude",
+                "in": "path",
+                "required": true,
+                "description": "Latitude coordinate",
+                "schema": {
+                  "type": "number"
+                }
+              },
+              {
+                "name": "longitude",
+                "in": "path",
+                "required": true,
+                "description": "Longitude coordinate",
+                "schema": {
+                  "type": "number"
+                }
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "Successful response",
+                "content": {
+                  "application/json": {
+                    "example": {
+                      "stops": [
+                        {"stop_id": 1, "stop_name": "Stop 1"},
+                        {"stop_id": 2, "stop_name": "Stop 2"}
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/arrets": {
+          "get": {
+            "tags": ["Application"],
+            "summary": "Get all stops",
+            "description": "Retrieve a list of all stops",
+            "responses": {
+              "200": {
+                "description": "Successful response",
+                "content": {
+                  "application/json": {
+                    "example": {
+                      "stops": [
+                        {"stop_id": 1, "stop_name": "Stop 1"},
+                        {"stop_id": 2, "stop_name": "Stop 2"}
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+    },
+    "securitySchemes": {
+        "petstore_auth": {
+            "type": "oauth2",
+            "flows": {
+            "implicit": {
+                "authorizationUrl": "https://petstore3.swagger.io/oauth/authorize",
+                "scopes": {
+                "write:pets": "modify pets in your account",
+                "read:pets": "read your pets"
+                }
+            }
+            }
+        },
+        "api_key": {
+            "type": "apiKey",
+            "name": "api_key",
+            "in": "header"
+        }
+    }
+}

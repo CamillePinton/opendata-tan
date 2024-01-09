@@ -1,11 +1,32 @@
 from flask import Flask
 import os
 import requests
+from flask_swagger_ui import get_swaggerui_blueprint
+
 
 def create_app(test_config=None):
     app = Flask(__name__)
 
+    #-------------
+    SWAGGER_URL = '/api/docs'  # URL for exposing Swagger UI (without trailing '/')
+    API_URL = '/static/swagger.json'  # Our API url (can of course be a local resource)
+
+    swaggerui_blueprint = get_swaggerui_blueprint(
+        SWAGGER_URL,
+        API_URL,
+        config={ 
+            'app_name': "opendata-tan"
+        }
+    )
+    app.register_blueprint(swaggerui_blueprint)
+    #-------------
+
     opendata_link = "https://open.tan.fr"
+
+    if test_config:
+        app.config.update({
+            "TESTING": True,
+        })
 
     @app.route('/')
     def hello_world():
