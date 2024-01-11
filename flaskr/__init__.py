@@ -62,8 +62,14 @@ def create_app(test_config=None):
 
 
     # Horaires (théoriques)
+    @app.route('/horaires/<codeArret>/<numLigne>/<sens>', methods=['GET'])
+    def get_horaires(codeArret, numLigne, sens):
+        return requests.get(opendata_link + f"/ewp/horairesarret.json/{codeArret}/{numLigne}/{sens}").json()
 
     # Temps Attente
+    @app.route('/tempsattente/<codeArret>', methods=['GET'])
+    def get_temps_attente(codeArret):
+        return requests.get(opendata_link + f"/ewp/tempsattente.json/{codeArret}").json()
 
     # Temps attente pour un lieu ou arret et un nombre de passages
     @app.route('/tempsattente/<codeArret>/<nbPassages>', methods=['GET'])
