@@ -23,3 +23,9 @@ def runner(app):
 def test_request_arrets(client):
     response = client.get("/arrets")
     assert response.status_code == 200
+@pytest.mark.parametrize("codeArret, status_code",
+                         [("HBLI", 200),
+                         ("COMM", 200)])
+def test_request_tempsattente(codeArret, status_code, client):
+    response = client.get(f"/tempsattente/{codeArret}")
+    assert response.status_code == status_code

@@ -16,12 +16,47 @@
         </div>
     </form>
     <div>
-        <h1>Arrêts :</h1>
-        <ol class="space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
-        {% for arret in arrets %}
-            <li>{{ arret }}</li>
-        {% endfor %}
-        </ol>
+        <table style="width:100%;">
+        <thead>
+            <tr>
+                <th style="width:100px;text-align:center;">code lieu</th>
+                <th style="width:250px;">libelle</th>
+                <th>ligne</th>
+            </tr>
+        </thead>
+        {% if num_ligne != None %}
+        <tbody>
+            {% for arret in arrets %}
+            <tr>
+                <td style="text-align:center;">{{ arret['codeLieu'] }}</td>
+                <td>{{ arret['libelle'] }}</td>
+                <td>
+                    {% for ligne in arret['ligne'] %}
+                        {% if ligne['numLigne'] == num_ligne %}
+                        <strong style="color:red;">{{ligne['numLigne']}}</strong><span> / </span>
+                        {% else %}
+                        <span>{{ligne['numLigne']}} / </span>
+                        {% endif %}
+                    {% endfor %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        {% else %}
+        <tbody>
+            {% for arret in arrets %}
+            <tr>
+                <td style="text-align:center;">{{ arret['codeLieu'] }}</td>
+                <td>{{ arret['libelle'] }}</td>
+                <td>
+                    {% for ligne in arret['ligne'] %}
+                        <span>{{ligne['numLigne']}} / </span>
+                    {% endfor %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        {% endif %}
     </div>
 </body>
 </html>

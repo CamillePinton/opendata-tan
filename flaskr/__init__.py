@@ -51,19 +51,25 @@ def create_app(test_config=None):
         arrets = requests.get(opendata_link + '/ewp/arrets.json').json()
         if request.method == 'POST':
             # Retrieve the text from the textarea
-            num_ligne = request.form.get('textarea').replace('\n','').replace(' ','')
+            num_ligne = request.form.get('textarea').replace(' ','').rstrip()
             # Print the text in terminal for verification
             arrets_ligne = []
             for arret in arrets:
                 if {"numLigne": num_ligne} in arret['ligne']:
                     arrets_ligne.append(arret)
-            return render_template('arrets.jinja2', arrets=arrets_ligne)
-        return render_template('arrets.jinja2', arrets=arrets)
+            return render_template('arrets.jinja2', arrets=arrets_ligne, num_ligne=num_ligne)
+        return render_template('arrets.jinja2', arrets=arrets, num_ligne=None)
 
 
     # Horaires (théoriques)
+    @app.route('/horaires/<codeArret>/<numLigne>/<sens>', methods=['GET'])
+    def get_horaires(codeArret, numLigne, sens):
+        return requests.get(opendata_link + f"/ewp/horairesarret.json/{codeArret}/{numLigne}/{sens}").json()
 
     # Temps Attente
+    @app.route('/tempsattente/<codeArret>', methods=['GET'])
+    def get_temps_attente(codeArret):
+        return requests.get(opendata_link + f"/ewp/tempsattente.json/{codeArret}").json()
 
     # Temps attente pour un lieu ou arret et un nombre de passages
     @app.route('/tempsattente/<codeArret>/<nbPassages>', methods=['GET'])
