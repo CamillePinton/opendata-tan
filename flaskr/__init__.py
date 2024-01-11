@@ -42,35 +42,46 @@ def create_app(test_config=None):
     # Recherche arrets proche d'une latitude/longitude
     @app.route('/find_arret/<latitude>/<longitude>', methods=['GET'])
     def get_closest_arret(latitude, longitude):
-        req = requests.get(opendata_link + "/ewp/arrets.json/{latitude}/{longitude}").json()
-        return req
+        return requests.get(opendata_link + f"/ewp/arrets.json/{latitude}/{longitude}").json()
 
 
     # Liste de tous les arrets
-
     @app.route('/arrets', methods=['GET','POST'])
     def get_arrets_by_ligne():
         arrets = requests.get(opendata_link + '/ewp/arrets.json').json()
         if request.method == 'POST':
             # Retrieve the text from the textarea
-            num_ligne = request.form.get('textarea').replace('\n','').replace(' ','')
+            num_ligne = request.form.get('textarea').replace(' ','').rstrip()
             # Print the text in terminal for verification
             arrets_ligne = []
             for arret in arrets:
                 if {"numLigne": num_ligne} in arret['ligne']:
                     arrets_ligne.append(arret)
-            return render_template('arrets.jinja2', arrets=arrets_ligne)
-        return render_template('arrets.jinja2', arrets=arrets)
+            return render_template('arrets.jinja2', arrets=arrets_ligne, num_ligne=num_ligne)
+        return render_template('arrets.jinja2', arrets=arrets, num_ligne=None)
 
 
     # Horaires (théoriques)
+    @app.route('/horaires/<codeArret>/<numLigne>/<sens>', methods=['GET'])
+    def get_horaires(codeArret, numLigne, sens):
+        return requests.get(opendata_link + f"/ewp/horairesarret.json/{codeArret}/{numLigne}/{sens}").json()
 
     # Temps Attente
+    @app.route('/tempsattente/<codeArret>', methods=['GET'])
+    def get_temps_attente(codeArret):
+        return requests.get(opendata_link + f"/ewp/tempsattente.json/{codeArret}").json()
 
     # Temps attente pour un lieu ou arret et un nombre de passages
+    @app.route('/tempsattente/<codeArret>/<nbPassages>', methods=['GET'])
+    def get_temps_attente_pour_lieu_ou_arret_et_nbPassages(codeArret, nbPassages):
+        return requests.get(opendata_link + f"/ewp/tempsattentelieu.json/{codeArret}/{nbPassages}").json()
 
     # Temps attente pour un lieu ou arret, un nombre de passages et un numéro de ligne
-
+    @app.route('/tempsattente/<codeArret>/<nbPassages>/<numLigne>', methods=['GET'])
+    def get_temps_attente_pour_lieu_ou_arret_et_nbPassages_et_numLigne(codeArret, nbPassages, numLigne):
+        return requests.get(opendata_link + f"/ewp/tempsattentelieu.json/{codeArret}/{nbPassages}/{numLigne}").json()
+    
+    
     return app
 
 if __name__ == "__main__":

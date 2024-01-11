@@ -5,20 +5,58 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../static/css/output.css" rel="stylesheet">
     <title>Document</title>
 </head>
 <body>
-    <form method="POST">
-        <textarea name="textarea"></textarea>
-        <input type="submit" value="Submit">
+    <form method="POST" class="w-full max-w-sm">
+        <div class="flex items-center border-b border-teal-500 py-2">
+            <textarea name="textarea" class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"></textarea>
+            <input type="submit" value="Chercher une ligne" class="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded">
+        </div>
     </form>
     <div>
-        <h1>Arrêts :</h1>
-        <ol>
-        {% for arret in arrets %}
-            <li>{{ arret }}</li>
-        {% endfor %}
-        </ol>
+        <table style="width:100%;">
+        <thead>
+            <tr>
+                <th style="width:100px;text-align:center;">code lieu</th>
+                <th style="width:250px;">libelle</th>
+                <th>ligne</th>
+            </tr>
+        </thead>
+        {% if num_ligne != None %}
+        <tbody>
+            {% for arret in arrets %}
+            <tr>
+                <td style="text-align:center;">{{ arret['codeLieu'] }}</td>
+                <td>{{ arret['libelle'] }}</td>
+                <td>
+                    {% for ligne in arret['ligne'] %}
+                        {% if ligne['numLigne'] == num_ligne %}
+                        <strong style="color:red;">{{ligne['numLigne']}}</strong><span> / </span>
+                        {% else %}
+                        <span>{{ligne['numLigne']}} / </span>
+                        {% endif %}
+                    {% endfor %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        {% else %}
+        <tbody>
+            {% for arret in arrets %}
+            <tr>
+                <td style="text-align:center;">{{ arret['codeLieu'] }}</td>
+                <td>{{ arret['libelle'] }}</td>
+                <td>
+                    {% for ligne in arret['ligne'] %}
+                        <span>{{ligne['numLigne']}} / </span>
+                    {% endfor %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        {% endif %}
     </div>
 </body>
 </html>
