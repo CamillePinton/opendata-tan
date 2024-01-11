@@ -51,7 +51,7 @@ def create_app(test_config=None):
         arrets = requests.get(opendata_link + '/ewp/arrets.json').json()
         if request.method == 'POST':
             # Retrieve the text from the textarea
-            num_ligne = request.form.get('textarea')
+            num_ligne = request.form.get('textarea').replace('\n','').replace(' ','')
             # Print the text in terminal for verification
             arrets_ligne = []
             for arret in arrets:
