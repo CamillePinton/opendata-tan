@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../static/css/output.css" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <table style="width:100%;">
+        <thead>
+            <tr>
+                <th>temps</th>
+                <th>temps réel</th>
+                <th>num ligne</th>
+                <th>terminus</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for horaire in horaires %}
+            <tr>
+                <td>{{ horaire['temps'] }}</td>
+                <td>{{ horaire['tempsReel'] }}</td>
+                <td>{{ horaire['ligne']['numLigne'] }}</td>
+                <td>{{ horaire['terminus'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    
+    </div>
+</body>
+</html>

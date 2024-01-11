@@ -42,7 +42,7 @@ def create_app(test_config=None):
     # Recherche arrets proche d'une latitude/longitude
     @app.route('/find_arret/<latitude>/<longitude>', methods=['GET'])
     def get_closest_arret(latitude, longitude):
-        return requests.get(opendata_link + f"/ewp/arrets.json/{latitude}/{longitude}").json()
+        return render_template('arrets_closest.jinja2', arrets=requests.get(opendata_link + f"/ewp/arrets.json/{latitude}/{longitude}").json())
 
 
     # Liste de tous les arrets
@@ -69,17 +69,17 @@ def create_app(test_config=None):
     # Temps Attente
     @app.route('/tempsattente/<codeArret>', methods=['GET'])
     def get_temps_attente(codeArret):
-        return requests.get(opendata_link + f"/ewp/tempsattente.json/{codeArret}").json()
+        return render_template('horaires.jinja2',horaires = requests.get(opendata_link + f"/ewp/tempsattente.json/{codeArret}").json())
 
     # Temps attente pour un lieu ou arret et un nombre de passages
     @app.route('/tempsattente/<codeArret>/<nbPassages>', methods=['GET'])
     def get_temps_attente_pour_lieu_ou_arret_et_nbPassages(codeArret, nbPassages):
-        return requests.get(opendata_link + f"/ewp/tempsattentelieu.json/{codeArret}/{nbPassages}").json()
+        return render_template( 'horaires.jinja2',horaires = requests.get(opendata_link + f"/ewp/tempsattentelieu.json/{codeArret}/{nbPassages}").json())
 
     # Temps attente pour un lieu ou arret, un nombre de passages et un numéro de ligne
     @app.route('/tempsattente/<codeArret>/<nbPassages>/<numLigne>', methods=['GET'])
     def get_temps_attente_pour_lieu_ou_arret_et_nbPassages_et_numLigne(codeArret, nbPassages, numLigne):
-        return requests.get(opendata_link + f"/ewp/tempsattentelieu.json/{codeArret}/{nbPassages}/{numLigne}").json()
+        return render_template('horaires.jinja2',horaires = requests.get(opendata_link + f"/ewp/tempsattentelieu.json/{codeArret}/{nbPassages}/{numLigne}").json())
     
     
     return app

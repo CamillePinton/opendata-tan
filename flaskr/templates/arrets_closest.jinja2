@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../static/css/output.css" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <table style="width:100%;">
+        <thead>
+            <tr>
+                <th style="width:100px;text-align:center;">code lieu</th>
+                <th style="width:100px;text-align:center;">distance</th>
+                <th style="width:250px;">libelle</th>
+                <th>ligne</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for arret in arrets %}
+            <tr>
+                <td style="text-align:center;">{{ arret['codeLieu'] }}</td>
+                <td style="text-align:center;">{{ arret['distance'] }}</td>
+                <td>{{ arret['libelle'] }}</td>
+                <td>
+                    {% for ligne in arret['ligne'] %}
+                    <span>{{ligne['numLigne']}} / </span>
+                    {% endfor %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </div>
+</body>
+</html>
