@@ -1,235 +1,274 @@
 {
-    "openapi": "3.0.3",
-    "info": {
-      "title": "Hackathon - Opendata-tan 3.0",
-      "description": "IMT Atlantique - UE Hackathon - groupe1 - Maxime Garnier, Camille Pinton, Thomas Ruan",
-      "termsOfService": "http://swagger.io/terms/",
-      "contact": {
-        "email": "apiteam@swagger.io"
-      },
-      "license": {
-        "name": "Apache 2.0",
-        "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
-      },
-      "version": "1.0.11"
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Hackathon - Opendata-tan 3.0",
+    "description": "IMT Atlantique - UE Hackathon - groupe1 - Maxime Garnier, Camille Pinton, Thomas Ruan",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "apiteam@swagger.io"
     },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.11"
+  },
 
-    "tags": [
-      {
-        "name": "Application",
-        "description": "Everything about OpenApi TAN ",
-        "externalDocs": {
-          "description": "Find out more",
-          "url": "https://open.tan.fr/doc/openapi"
-        }
-      },
-      {
-        "name": "Autres",
-        "description": "Je ne sais pas mais il faut encore automatiser ca"
+  "tags": [
+    {
+      "name": "Application",
+      "description": "Everything about OpenApi TAN ",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "https://open.tan.fr/doc/openapi"
       }
-    ],
-    
-    "paths": {
-      "/": {
-        "get": {
-          "tags": ["Application"],
-          "summary": "Page Home",
-          "description": "Hello world !",
-          "responses": {
-            "200": {
-              "description": "Successful response",
-              "content": {
-                "text/plain": {
-                  "example": "Hello, World!"
-                }
-              }
-            }
-          }
-        }
-      },
-      "/find_arret/{latitude}/{longitude}": {
-        "get": {
-          "tags": ["Application"],
-          "summary": "Find closest stop",
-          "description": "Retrieve stops near a specific latitude and longitude",
-          "parameters": [
-            {
-              "name": "latitude",
-              "in": "path",
-              "required": true,
-              "description": "Latitude coordinate",
-              "schema": {
-                "type": "number"
-              }
-            },
-            {
-              "name": "longitude",
-              "in": "path",
-              "required": true,
-              "description": "Longitude coordinate",
-              "schema": {
-                "type": "number"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Successful response",
-              "content": {
-                "application/json": {
-                  "example": 
-                    [{"codeLieu":"AURR","distance":"326 m","libelle":"Aurore","ligne":[{"numLigne":"59"}]}]
-                }
-              }
-            }
-          }
-        }
-      },
-      "/arrets": {
-        "get": {
-          "tags": ["Application"],
-          "summary": "Get all stops",
-          "description": "Retrieve a list of all stops",
-          "responses": {
-            "200": {
-              "description": "Successful response",
-              "content": {
-                "application/json": {
-                  "example": [{"codeLieu": "ABDU","libelle": "Abel Durand","distance": null,"ligne": [{"numLigne": "C20"},{"numLigne": "LO"}]}]
-                }
-              }
-            }
-          }
-        }
-      },
-      "/horaires/<codeArret>/<numLigne>/<sens>": {
-        "get": {
-          "tags": ["Application"],
-          "summary": "Page Home",
-          "description": "Hello world !",
-          "responses": {
-            "200": {
-              "description": "Successful response",
-              "content": {
-                "text/plain": {
-                  "example": "Hello, World!"
-                }
-              }
-            }
-          }
-        }
-      },
-      "/horaires/<codeArret>/<numLigne>/<sens>": {
-        "get": {
-          "tags": ["Application"],
-          "summary": "Page Home",
-          "description": "Hello world !",
-          "responses": {
-            "200": {
-              "description": "Successful response",
-              "content": {
-                "text/plain": {
-                  "example": "Hello, World!"
-                }
-              }
-            }
-          }
-        }
-      },
-      "/tempsattente/<codeAr>/<nbPassages>": {
-        "get": {
-          "tags": [
-            "Application"
-          ],
-          "summary": "Get waiting time for a stop and number of passages",
-          "description": "Retrieve the waiting time for a specific stop and number of passages",
-          "parameters": [
-            {
-              "name": "codeArret",
-              "in": "path",
-              "required": true,
-              "description": "Stop code",
-              "schema": {
-                "type": "string"
-              }
-            },
-            {
-              "name": "nbPassages",
-              "in": "path",
-              "required": true,
-              "description": "Number of passages",
-              "schema": {
-                "type": "integer"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Successful response",
-              "content": {
-                "application/json": {
-                  "example":
-                    [{"arret":{"codeArret":"BATI2"},"dernierDepart":"false","infotrafic":false,"ligne":{"numLigne":"C6","typeLigne":3},"sens":2,"temps":"4mn","tempsReel":"true","terminus":"Hermeland"}]
-                }
-              }
-            }
-          }
-        }
-      },
-      "/tempsattente/<codeArret>/<nbPassages>/<numLigne>": {
-        "get": {
-          "tags": [
-            "Application"
-          ],
-          "summary": "Get waiting time for a stop, number of passages, and line",
-          "description": "Retrieve the waiting time for a specific stop, number of passages, and line",
-          "parameters": [
-            {
-              "name": "codeArret",
-              "in": "path",
-              "required": true,
-              "description": "Stop code",
-              "schema": {
-                "type": "string"
-              }
-            },
-            {
-              "name": "nbPassages",
-              "in": "path",
-              "required": true,
-              "description": "Number of passages",
-              "schema": {
-                "type": "integer"
-              }
-            },
-            {
-              "name": "numLigne",
-              "in": "path",
-              "required": true,
-              "description": "Line number",
-              "schema": {
-                "type": "integer"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Successful response",
-              "content": {
-                "application/json": {
-                  "example": [{"arret":{"codeArret":"BATI2"},"dernierDepart":"false","infotrafic":false,"ligne":{"numLigne":"C6","typeLigne":3},"sens":2,"temps":"4mn","tempsReel":"true","terminus":"Hermeland"}]
-                }
+    },
+    {
+      "name": "Autres",
+      "description": "Je ne sais pas mais il faut encore automatiser ca"
+    }
+  ],
+  
+  "paths": {
+    "/": {
+      "get": {
+        "tags": ["Application"],
+        "summary": "Page Home",
+        "description": "Hello world !",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "text/plain": {
+                "example": "Hello, World!"
               }
             }
           }
         }
       }
     },
-    "securitySchemes": {
-        "api_key": {
-            "type": "apiKey",
-            "name": "api_key",
-            "in": "header"
+    "/find_arret/{latitude}/{longitude}": {
+      "get": {
+        "tags": ["Application"],
+        "summary": "Find closest stop",
+        "description": "Retrieve stops near a specific latitude and longitude",
+        "parameters": [
+          {
+            "name": "latitude",
+            "in": "path",
+            "required": true,
+            "description": "Latitude coordinate",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "longitude",
+            "in": "path",
+            "required": true,
+            "description": "Longitude coordinate",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "example": 
+                  [{"codeLieu":"AURR","distance":"326 m","libelle":"Aurore","ligne":[{"numLigne":"59"}]}]
+              }
+            }
+          }
         }
+      }
+    },
+    "/arrets": {
+      "get": {
+        "tags": ["Application"],
+        "summary": "Get all stops",
+        "description": "Retrieve a list of all stops",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "example": [{"codeLieu": "ABDU","libelle": "Abel Durand","distance": null,"ligne": [{"numLigne": "C20"},{"numLigne": "LO"}]}]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/horaires/<codeArret>/<numLigne>/<sens>": {
+      "get": {
+        "tags": ["Application"],
+        "summary": "Get Horaires",
+        "description": "Get theoretical schedules for a specific bus stop, line, and direction.",
+        "parameters": [
+          {
+            "name": "codeArret",
+            "in": "path",
+            "required": true,
+            "description": "Code of the bus stop",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "numLigne",
+            "in": "path",
+            "required": true,
+            "description": "Number of the bus line",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sens",
+            "in": "path",
+            "required": true,
+            "description": "Direction of the bus",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "example": "Erreur serveur"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tempsattente/<codeArret>": {
+      "get": {
+        "tags": ["Application"],
+        "summary": "Get Temps Attente",
+        "description": "Get waiting times for a specific bus stop.",
+        "parameters": [
+          {
+            "name": "codeArret",
+            "in": "path",
+            "required": true,
+            "description": "Code of the bus stop",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "example": [{"arret":{"codeArret":"BATI1"},"dernierDepart":"false","infotrafic":false,"ligne":{"numLigne":"C6","typeLigne":3},"sens":1,"temps":"4mn","tempsReel":"true","terminus":"Chantrerie - Grandes Ecoles"}]}
+            }
+          }
+        }
+      }
+    },     
+    "/tempsattente/<codeAr>/<nbPassages>": {
+      "get": {
+        "tags": [
+          "Application"
+        ],
+        "summary": "Get waiting time for a stop and number of passages",
+        "description": "Retrieve the waiting time for a specific stop and number of passages",
+        "parameters": [
+          {
+            "name": "codeArret",
+            "in": "path",
+            "required": true,
+            "description": "Stop code",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "nbPassages",
+            "in": "path",
+            "required": true,
+            "description": "Number of passages",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "example":
+                  [{"arret":{"codeArret":"BATI2"},"dernierDepart":"false","infotrafic":false,"ligne":{"numLigne":"C6","typeLigne":3},"sens":2,"temps":"4mn","tempsReel":"true","terminus":"Hermeland"}]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tempsattente/<codeArret>/<nbPassages>/<numLigne>": {
+      "get": {
+        "tags": [
+          "Application"
+        ],
+        "summary": "Get waiting time for a stop, number of passages, and line",
+        "description": "Retrieve the waiting time for a specific stop, number of passages, and line",
+        "parameters": [
+          {
+            "name": "codeArret",
+            "in": "path",
+            "required": true,
+            "description": "Stop code",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "nbPassages",
+            "in": "path",
+            "required": true,
+            "description": "Number of passages",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "numLigne",
+            "in": "path",
+            "required": true,
+            "description": "Line number",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "example": [{"arret":{"codeArret":"BATI2"},"dernierDepart":"false","infotrafic":false,"ligne":{"numLigne":"C6","typeLigne":3},"sens":2,"temps":"4mn","tempsReel":"true","terminus":"Hermeland"}]
+              }
+            }
+          }
+        }
+      }
     }
+  },
+  "securitySchemes": {
+      "api_key": {
+          "type": "apiKey",
+          "name": "api_key",
+          "in": "header"
+      }
+  }
 }
