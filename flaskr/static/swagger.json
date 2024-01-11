@@ -102,6 +102,40 @@
           }
         }
       },
+      "/horaires/<codeArret>/<numLigne>/<sens>": {
+        "get": {
+          "tags": ["Application"],
+          "summary": "Page Home",
+          "description": "Hello world !",
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "content": {
+                "text/plain": {
+                  "example": "Hello, World!"
+                }
+              }
+            }
+          }
+        }
+      },
+      "/horaires/<codeArret>/<numLigne>/<sens>": {
+        "get": {
+          "tags": ["Application"],
+          "summary": "Page Home",
+          "description": "Hello world !",
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "content": {
+                "text/plain": {
+                  "example": "Hello, World!"
+                }
+              }
+            }
+          }
+        }
+      },
       "/tempsattente/<codeAr>/<nbPassages>": {
         "get": {
           "tags": [
