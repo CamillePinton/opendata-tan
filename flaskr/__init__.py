@@ -57,8 +57,8 @@ def create_app(test_config=None):
             for arret in arrets:
                 if {"numLigne": num_ligne} in arret['ligne']:
                     arrets_ligne.append(arret)
-            return render_template('arrets.jinja2', arrets=arrets_ligne)
-        return render_template('arrets.jinja2', arrets=arrets)
+            return render_template('arrets.jinja2', arrets=arrets_ligne, num_ligne=num_ligne)
+        return render_template('arrets.jinja2', arrets=arrets, num_ligne=None)
 
 
     # Horaires (théoriques)
