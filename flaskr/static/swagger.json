@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "title": "Hackathon - Opendata-tan 3.0",
+    "title": "Tan Hackppli",
     "description": "IMT Atlantique - UE Hackathon - groupe1 - Maxime Garnier, Romaric Moyeuvre, Camille Pinton, Thomas Ruan",
     "termsOfService": "http://swagger.io/terms/",
     "contact": {
@@ -34,15 +34,10 @@
       "get": {
         "tags": ["Application"],
         "summary": "Page Home",
-        "description": "Hello world !",
+        "description": "Accueil de l'application Tan Hackppli",
         "responses": {
           "200": {
-            "description": "Successful response",
-            "content": {
-              "text/plain": {
-                "example": "Hello, World!"
-              }
-            }
+            "description": "Successful response"
           }
         }
       }
