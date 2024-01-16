@@ -2,7 +2,7 @@
   "openapi": "3.0.3",
   "info": {
     "title": "Hackathon - Opendata-tan 3.0",
-    "description": "IMT Atlantique - UE Hackathon - groupe1 - Maxime Garnier, Camille Pinton, Thomas Ruan",
+    "description": "IMT Atlantique - UE Hackathon - groupe1 - Maxime Garnier, Romaric Moyeuvre, Camille Pinton, Thomas Ruan",
     "termsOfService": "http://swagger.io/terms/",
     "contact": {
       "email": "apiteam@swagger.io"
