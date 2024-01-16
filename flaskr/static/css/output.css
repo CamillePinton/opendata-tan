@@ -552,6 +552,10 @@ video {
   display: flex;
 }
 
+.table {
+  display: table;
+}
+
 .w-full {
   width: 100%;
 }
