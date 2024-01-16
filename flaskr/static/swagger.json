@@ -16,8 +16,8 @@
 
   "tags": [
     {
-      "name": "Application",
-      "description": "Everything about OpenApi TAN ",
+      "name": "Tan Hackppli",
+      "description": "Everything about our OpenApi TAN application",
       "externalDocs": {
         "description": "Find out more",
         "url": "https://open.tan.fr/doc/openapi"
@@ -25,7 +25,7 @@
     },
     {
       "name": "Autres",
-      "description": "Je ne sais pas mais il faut encore automatiser ca"
+      "description": ""
     }
   ],
   
@@ -33,8 +33,8 @@
     "/": {
       "get": {
         "tags": ["Application"],
-        "summary": "Page Home",
-        "description": "Accueil de l'application Tan Hackppli",
+        "summary": "Home Page",
+        "description": "Tan Hackppli's home page",
         "responses": {
           "200": {
             "description": "Successful response"
